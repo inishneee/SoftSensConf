@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(retrieve));
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.Send_button = new System.Windows.Forms.Button();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.next_button = new System.Windows.Forms.Button();
             this.connect_button = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -58,11 +57,20 @@
             this.retrieve_settings_button = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.process1 = new System.Diagnostics.Process();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.aboutbutton1 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.manualbutton = new System.Windows.Forms.Button();
+            this.autobutton = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.readingstextBox = new System.Windows.Forms.TextBox();
+            this.stopbutton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -70,7 +78,6 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -80,8 +87,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.AliceBlue;
-            this.tabPage1.Controls.Add(this.Send_button);
-            this.tabPage1.Controls.Add(this.comboBox3);
+            this.tabPage1.Controls.Add(this.aboutbutton1);
             this.tabPage1.Controls.Add(this.next_button);
             this.tabPage1.Controls.Add(this.connect_button);
             this.tabPage1.Controls.Add(this.textBox1);
@@ -96,29 +102,9 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Connect";
             // 
-            // Send_button
-            // 
-            this.Send_button.Location = new System.Drawing.Point(74, 255);
-            this.Send_button.Name = "Send_button";
-            this.Send_button.Size = new System.Drawing.Size(121, 25);
-            this.Send_button.TabIndex = 9;
-            this.Send_button.Text = "Send command";
-            this.Send_button.UseVisualStyleBackColor = true;
-            this.Send_button.Click += new System.EventHandler(this.Send_button_Click);
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "readconf"});
-            this.comboBox3.Location = new System.Drawing.Point(71, 204);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 24);
-            this.comboBox3.TabIndex = 8;
-            // 
             // next_button
             // 
-            this.next_button.Location = new System.Drawing.Point(600, 400);
+            this.next_button.Location = new System.Drawing.Point(325, 198);
             this.next_button.Name = "next_button";
             this.next_button.Size = new System.Drawing.Size(75, 23);
             this.next_button.TabIndex = 7;
@@ -132,6 +118,7 @@
             this.connect_button.Size = new System.Drawing.Size(121, 25);
             this.connect_button.TabIndex = 5;
             this.connect_button.Text = "Connect";
+            this.toolTip1.SetToolTip(this.connect_button, "Connect to usnTopSens");
             this.connect_button.UseVisualStyleBackColor = true;
             this.connect_button.Click += new System.EventHandler(this.connect_button_Click);
             // 
@@ -140,7 +127,7 @@
             this.textBox1.Location = new System.Drawing.Point(239, 60);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(161, 169);
+            this.textBox1.Size = new System.Drawing.Size(161, 74);
             this.textBox1.TabIndex = 4;
             // 
             // bitratelabel
@@ -156,7 +143,11 @@
             // 
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
-            "9600"});
+            "2400",
+            "4800",
+            "9600",
+            "14400",
+            "19200"});
             this.comboBox2.Location = new System.Drawing.Point(71, 110);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 24);
@@ -174,8 +165,6 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "COM3"});
             this.comboBox1.Location = new System.Drawing.Point(71, 60);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
@@ -184,6 +173,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.textBox7);
             this.tabPage2.Controls.Add(this.panel1);
             this.tabPage2.Controls.Add(this.save_settings_button);
@@ -194,7 +185,6 @@
             this.tabPage2.Size = new System.Drawing.Size(862, 474);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // textBox7
             // 
@@ -308,6 +298,7 @@
             this.save_settings_button.Size = new System.Drawing.Size(121, 47);
             this.save_settings_button.TabIndex = 1;
             this.save_settings_button.Text = "Save new settings";
+            this.toolTip1.SetToolTip(this.save_settings_button, "Save settings, demands username and password");
             this.save_settings_button.UseVisualStyleBackColor = true;
             this.save_settings_button.Click += new System.EventHandler(this.save_settings_button_Click);
             // 
@@ -318,18 +309,24 @@
             this.retrieve_settings_button.Size = new System.Drawing.Size(121, 47);
             this.retrieve_settings_button.TabIndex = 0;
             this.retrieve_settings_button.Text = "Retrieve settings";
+            this.toolTip1.SetToolTip(this.retrieve_settings_button, "See saved settings");
             this.retrieve_settings_button.UseVisualStyleBackColor = true;
             this.retrieve_settings_button.Click += new System.EventHandler(this.retrieve_settings_button_Click);
             // 
             // tabPage3
             // 
+            this.tabPage3.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPage3.Controls.Add(this.stopbutton);
+            this.tabPage3.Controls.Add(this.readingstextBox);
+            this.tabPage3.Controls.Add(this.autobutton);
+            this.tabPage3.Controls.Add(this.manualbutton);
+            this.tabPage3.Controls.Add(this.button2);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(862, 474);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Sensor data";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // process1
             // 
@@ -341,23 +338,86 @@
             this.process1.StartInfo.UserName = "";
             this.process1.SynchronizingObject = this;
             // 
-            // tabPage4
+            // aboutbutton1
             // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 25);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(862, 474);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "About";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.aboutbutton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.aboutbutton1.Location = new System.Drawing.Point(464, 6);
+            this.aboutbutton1.Name = "aboutbutton1";
+            this.aboutbutton1.Size = new System.Drawing.Size(75, 23);
+            this.aboutbutton1.TabIndex = 8;
+            this.aboutbutton1.Text = "About";
+            this.toolTip1.SetToolTip(this.aboutbutton1, "About the software");
+            this.aboutbutton1.UseVisualStyleBackColor = true;
+            this.aboutbutton1.Click += new System.EventHandler(this.aboutbutton1_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(629, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "About";
+            this.toolTip1.SetToolTip(this.button1, "About the software");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(770, 15);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "About";
+            this.toolTip1.SetToolTip(this.button2, "About the software");
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // manualbutton
+            // 
+            this.manualbutton.Location = new System.Drawing.Point(29, 33);
+            this.manualbutton.Name = "manualbutton";
+            this.manualbutton.Size = new System.Drawing.Size(116, 33);
+            this.manualbutton.TabIndex = 10;
+            this.manualbutton.Text = "Maual reading";
+            this.manualbutton.UseVisualStyleBackColor = true;
+            this.manualbutton.Click += new System.EventHandler(this.manualbutton_Click);
+            // 
+            // autobutton
+            // 
+            this.autobutton.Location = new System.Drawing.Point(151, 33);
+            this.autobutton.Name = "autobutton";
+            this.autobutton.Size = new System.Drawing.Size(111, 33);
+            this.autobutton.TabIndex = 11;
+            this.autobutton.Text = "Auto reading";
+            this.autobutton.UseVisualStyleBackColor = true;
+            this.autobutton.Click += new System.EventHandler(this.autobutton_Click);
+            // 
+            // readingstextBox
+            // 
+            this.readingstextBox.Location = new System.Drawing.Point(29, 95);
+            this.readingstextBox.Multiline = true;
+            this.readingstextBox.Name = "readingstextBox";
+            this.readingstextBox.Size = new System.Drawing.Size(233, 347);
+            this.readingstextBox.TabIndex = 12;
+            // 
+            // stopbutton
+            // 
+            this.stopbutton.Location = new System.Drawing.Point(268, 33);
+            this.stopbutton.Name = "stopbutton";
+            this.stopbutton.Size = new System.Drawing.Size(119, 33);
+            this.stopbutton.TabIndex = 13;
+            this.stopbutton.Text = "Stop reading";
+            this.stopbutton.UseVisualStyleBackColor = true;
+            this.stopbutton.Click += new System.EventHandler(this.stopbutton_Click);
             // 
             // retrieve
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(885, 623);
+            this.ClientSize = new System.Drawing.Size(891, 530);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "retrieve";
             this.Text = "SoftSensConf";
             this.tabControl1.ResumeLayout(false);
@@ -367,6 +427,8 @@
             this.tabPage2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -399,9 +461,15 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Diagnostics.Process process1;
         private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Button Send_button;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button aboutbutton1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button autobutton;
+        private System.Windows.Forms.Button manualbutton;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TextBox readingstextBox;
+        private System.Windows.Forms.Button stopbutton;
     }
 }
 

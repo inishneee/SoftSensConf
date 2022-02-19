@@ -1,0 +1,6 @@
+﻿Build started...
+1>------ Build started: Project: SoftSensConf, Configuration: Debug Any CPU ------
+1>C:\Users\inish\source\repos\SoftSensConf\Form1.cs(61,30,61,41): warning CS0168: The variable 'IOException' is declared but never used
+1>C:\Users\inish\source\repos\SoftSensConf\Form1.cs(101,30,101,54): warning CS0168: The variable 'IndexOutOfRangeException' is declared but never used
+1>  SoftSensConf -> C:\Users\inish\source\repos\SoftSensConf\bin\Debug\SoftSensConf.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
