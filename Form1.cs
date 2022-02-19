@@ -9,11 +9,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.IO;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace SoftSensConf
 {
     public partial class retrieve : Form
     {
+        List<int> analogReading = new List<int>();
+        List<DateTime> voltageDiff = new List<DateTime>();
+        String timeStamp = GetTimestamp(DateTime.Now);
+
+        public static String GetTimestamp(DateTime value)
+        {
+            return value.ToString("yyyyMMddHHmmssffff");
+        }
+
         public retrieve()
         {
             InitializeComponent();
@@ -23,7 +33,32 @@ namespace SoftSensConf
             comboBox1.Items.Clear();
             comboBox1.Items.AddRange(SerialPort.GetPortNames());
             comboBox1.Text = comboBox1.Items[0].ToString();
+            
+                
         }
+
+        void DataRecievedHandler(object sender, SerialDataReceivedEventArgs e)
+        {
+            int iVab;
+            string RecievedData = ((SerialPort)sender).ReadLine();
+            readingstextBox.Invoke((MethodInvoker) delegate 
+            {readingstextBox.AppendText("Recieved:" + RecievedData + "\r\n");});
+            string[] separateParts= RecievedData.Split(';');
+            if (int.TryParse(separateParts[2],out iVab))
+           
+
+            {
+                analogReading.Add(iVab);
+                //timeStamp.Add(DateTime.Now);
+                chart1.Series["Vba"].Points.DataBindXY(timeStamp, analogReading);
+                chart1.Invalidate();
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong");
+            }
+        }
+            
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -112,29 +147,38 @@ namespace SoftSensConf
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
+        {   //aboutbutton2
             AboutBox1 aboutWindow = new AboutBox1();
             aboutWindow.ShowDialog(this);
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
+        {    //aboutbutton3
             AboutBox1 aboutWindow = new AboutBox1();
             aboutWindow.ShowDialog(this);
+
         }
 
         private void manualbutton_Click(object sender, EventArgs e)
         {
-            if (serialPort1.IsOpen)
+            try
             {
                 serialPort1.WriteLine("readanalog");
                 readingstextBox.AppendText(serialPort1.ReadLine());
                 readingstextBox.AppendText("\r\n");
+                timer1.Stop();
+            }
+            catch (Exception InvalidOperationException)
+            {
+                MessageBox.Show("Something went wrong");    
             }
         }
 
         private void autobutton_Click(object sender, EventArgs e)
         {
+            serialPort1.WriteLine("readanalog");
+            readingstextBox.AppendText(serialPort1.ReadLine());
+            readingstextBox.AppendText("\r\n");
             timer1.Start();
         }
 
