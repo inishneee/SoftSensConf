@@ -36,14 +36,17 @@
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.next_button = new System.Windows.Forms.Button();
-            this.connect_button = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.disconnectbutton = new System.Windows.Forms.Button();
+            this.aboutbutton1 = new System.Windows.Forms.Button();
+            this.connect_button = new System.Windows.Forms.Button();
             this.bitratelabel = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.portlabel = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.value_button = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBoxalarmh = new System.Windows.Forms.TextBox();
@@ -59,17 +62,20 @@
             this.save_settings_button = new System.Windows.Forms.Button();
             this.retrieve_settings_button = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.process1 = new System.Diagnostics.Process();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.aboutbutton1 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.manualbutton = new System.Windows.Forms.Button();
-            this.autobutton = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.readingstextBox = new System.Windows.Forms.TextBox();
-            this.stopbutton = new System.Windows.Forms.Button();
+            this.sendbutton = new System.Windows.Forms.Button();
+            this.inputtext = new System.Windows.Forms.TextBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.stopbutton = new System.Windows.Forms.Button();
+            this.readingstextBox = new System.Windows.Forms.TextBox();
+            this.autobutton = new System.Windows.Forms.Button();
+            this.manualbutton = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button3 = new System.Windows.Forms.Button();
+            this.status = new System.Windows.Forms.Label();
+            this.password = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -86,16 +92,16 @@
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(870, 503);
+            this.tabControl1.Size = new System.Drawing.Size(735, 503);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.AliceBlue;
-            this.tabPage1.Controls.Add(this.aboutbutton1);
-            this.tabPage1.Controls.Add(this.next_button);
-            this.tabPage1.Controls.Add(this.connect_button);
             this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.disconnectbutton);
+            this.tabPage1.Controls.Add(this.aboutbutton1);
+            this.tabPage1.Controls.Add(this.connect_button);
             this.tabPage1.Controls.Add(this.bitratelabel);
             this.tabPage1.Controls.Add(this.comboBox2);
             this.tabPage1.Controls.Add(this.portlabel);
@@ -103,18 +109,39 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(862, 474);
+            this.tabPage1.Size = new System.Drawing.Size(727, 474);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Connect";
             // 
-            // next_button
+            // textBox1
             // 
-            this.next_button.Location = new System.Drawing.Point(325, 198);
-            this.next_button.Name = "next_button";
-            this.next_button.Size = new System.Drawing.Size(75, 23);
-            this.next_button.TabIndex = 7;
-            this.next_button.Text = "Next";
-            this.next_button.UseVisualStyleBackColor = true;
+            this.textBox1.Location = new System.Drawing.Point(230, 60);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(186, 31);
+            this.textBox1.TabIndex = 4;
+            // 
+            // disconnectbutton
+            // 
+            this.disconnectbutton.Location = new System.Drawing.Point(71, 188);
+            this.disconnectbutton.Name = "disconnectbutton";
+            this.disconnectbutton.Size = new System.Drawing.Size(121, 26);
+            this.disconnectbutton.TabIndex = 9;
+            this.disconnectbutton.Text = "Disconnect";
+            this.disconnectbutton.UseVisualStyleBackColor = true;
+            this.disconnectbutton.Click += new System.EventHandler(this.disconnectbutton_Click);
+            // 
+            // aboutbutton1
+            // 
+            this.aboutbutton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.aboutbutton1.Location = new System.Drawing.Point(444, 15);
+            this.aboutbutton1.Name = "aboutbutton1";
+            this.aboutbutton1.Size = new System.Drawing.Size(75, 23);
+            this.aboutbutton1.TabIndex = 8;
+            this.aboutbutton1.Text = "About";
+            this.toolTip1.SetToolTip(this.aboutbutton1, "About the software");
+            this.aboutbutton1.UseVisualStyleBackColor = true;
+            this.aboutbutton1.Click += new System.EventHandler(this.aboutbutton1_Click);
             // 
             // connect_button
             // 
@@ -126,14 +153,6 @@
             this.toolTip1.SetToolTip(this.connect_button, "Connect to usnTopSens");
             this.connect_button.UseVisualStyleBackColor = true;
             this.connect_button.Click += new System.EventHandler(this.connect_button_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(239, 60);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(161, 74);
-            this.textBox1.TabIndex = 4;
             // 
             // bitratelabel
             // 
@@ -179,6 +198,11 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.password);
+            this.tabPage2.Controls.Add(this.status);
+            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Controls.Add(this.value_button);
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.textBox7);
             this.tabPage2.Controls.Add(this.panel1);
@@ -187,16 +211,38 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(862, 474);
+            this.tabPage2.Size = new System.Drawing.Size(727, 474);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             // 
+            // value_button
+            // 
+            this.value_button.Location = new System.Drawing.Point(296, 264);
+            this.value_button.Name = "value_button";
+            this.value_button.Size = new System.Drawing.Size(121, 42);
+            this.value_button.TabIndex = 10;
+            this.value_button.Text = "Change to new values";
+            this.toolTip1.SetToolTip(this.value_button, "Requires password");
+            this.value_button.UseVisualStyleBackColor = true;
+            this.value_button.Click += new System.EventHandler(this.value_button_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(596, 21);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "About";
+            this.toolTip1.SetToolTip(this.button1, "About the software");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(190, 273);
+            this.textBox7.Location = new System.Drawing.Point(296, 50);
             this.textBox7.Multiline = true;
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(266, 195);
+            this.textBox7.Size = new System.Drawing.Size(264, 195);
             this.textBox7.TabIndex = 4;
             // 
             // panel1
@@ -211,9 +257,9 @@
             this.panel1.Controls.Add(this.textBoxurv);
             this.panel1.Controls.Add(this.textBoxlrv);
             this.panel1.Controls.Add(this.textBoxname);
-            this.panel1.Location = new System.Drawing.Point(190, 55);
+            this.panel1.Location = new System.Drawing.Point(51, 50);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(266, 211);
+            this.panel1.Size = new System.Drawing.Size(227, 182);
             this.panel1.TabIndex = 3;
             // 
             // textBoxalarmh
@@ -222,6 +268,7 @@
             this.textBoxalarmh.Name = "textBoxalarmh";
             this.textBoxalarmh.Size = new System.Drawing.Size(100, 22);
             this.textBoxalarmh.TabIndex = 11;
+            this.toolTip1.SetToolTip(this.textBoxalarmh, "Input new to change value");
             // 
             // label5
             // 
@@ -274,6 +321,7 @@
             this.textBoxalarml.Name = "textBoxalarml";
             this.textBoxalarml.Size = new System.Drawing.Size(100, 22);
             this.textBoxalarml.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.textBoxalarml, "Input new to change value");
             // 
             // textBoxurv
             // 
@@ -281,6 +329,7 @@
             this.textBoxurv.Name = "textBoxurv";
             this.textBoxurv.Size = new System.Drawing.Size(100, 22);
             this.textBoxurv.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.textBoxurv, "Input new to change value");
             // 
             // textBoxlrv
             // 
@@ -288,6 +337,7 @@
             this.textBoxlrv.Name = "textBoxlrv";
             this.textBoxlrv.Size = new System.Drawing.Size(100, 22);
             this.textBoxlrv.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.textBoxlrv, "Input new to change value");
             // 
             // textBoxname
             // 
@@ -295,25 +345,26 @@
             this.textBoxname.Name = "textBoxname";
             this.textBoxname.Size = new System.Drawing.Size(100, 22);
             this.textBoxname.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.textBoxname, "Input new to change value");
             // 
             // save_settings_button
             // 
-            this.save_settings_button.Location = new System.Drawing.Point(472, 91);
+            this.save_settings_button.Location = new System.Drawing.Point(439, 264);
             this.save_settings_button.Name = "save_settings_button";
-            this.save_settings_button.Size = new System.Drawing.Size(121, 47);
+            this.save_settings_button.Size = new System.Drawing.Size(121, 42);
             this.save_settings_button.TabIndex = 1;
-            this.save_settings_button.Text = "Save new settings";
+            this.save_settings_button.Text = "Save new settings to file";
             this.toolTip1.SetToolTip(this.save_settings_button, "Save settings, demands username and password");
             this.save_settings_button.UseVisualStyleBackColor = true;
             this.save_settings_button.Click += new System.EventHandler(this.save_settings_button_Click);
             // 
             // retrieve_settings_button
             // 
-            this.retrieve_settings_button.Location = new System.Drawing.Point(53, 88);
+            this.retrieve_settings_button.Location = new System.Drawing.Point(158, 264);
             this.retrieve_settings_button.Name = "retrieve_settings_button";
-            this.retrieve_settings_button.Size = new System.Drawing.Size(121, 47);
+            this.retrieve_settings_button.Size = new System.Drawing.Size(121, 42);
             this.retrieve_settings_button.TabIndex = 0;
-            this.retrieve_settings_button.Text = "Retrieve settings";
+            this.retrieve_settings_button.Text = "Retrieve settings\r\nfrom device";
             this.toolTip1.SetToolTip(this.retrieve_settings_button, "See saved settings");
             this.retrieve_settings_button.UseVisualStyleBackColor = true;
             this.retrieve_settings_button.Click += new System.EventHandler(this.retrieve_settings_button_Click);
@@ -321,6 +372,8 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPage3.Controls.Add(this.sendbutton);
+            this.tabPage3.Controls.Add(this.inputtext);
             this.tabPage3.Controls.Add(this.chart1);
             this.tabPage3.Controls.Add(this.stopbutton);
             this.tabPage3.Controls.Add(this.readingstextBox);
@@ -330,81 +383,54 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(862, 474);
+            this.tabPage3.Size = new System.Drawing.Size(727, 474);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Sensor data";
             // 
-            // process1
+            // sendbutton
             // 
-            this.process1.StartInfo.Domain = "";
-            this.process1.StartInfo.LoadUserProfile = false;
-            this.process1.StartInfo.Password = null;
-            this.process1.StartInfo.StandardErrorEncoding = null;
-            this.process1.StartInfo.StandardOutputEncoding = null;
-            this.process1.StartInfo.UserName = "";
-            this.process1.SynchronizingObject = this;
+            this.sendbutton.Location = new System.Drawing.Point(576, 33);
+            this.sendbutton.Name = "sendbutton";
+            this.sendbutton.Size = new System.Drawing.Size(138, 30);
+            this.sendbutton.TabIndex = 16;
+            this.sendbutton.Text = "Send command";
+            this.sendbutton.UseVisualStyleBackColor = true;
+            this.sendbutton.Click += new System.EventHandler(this.sendbutton_Click);
             // 
-            // aboutbutton1
+            // inputtext
             // 
-            this.aboutbutton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.aboutbutton1.Location = new System.Drawing.Point(464, 6);
-            this.aboutbutton1.Name = "aboutbutton1";
-            this.aboutbutton1.Size = new System.Drawing.Size(75, 23);
-            this.aboutbutton1.TabIndex = 8;
-            this.aboutbutton1.Text = "About";
-            this.toolTip1.SetToolTip(this.aboutbutton1, "About the software");
-            this.aboutbutton1.UseVisualStyleBackColor = true;
-            this.aboutbutton1.Click += new System.EventHandler(this.aboutbutton1_Click);
+            this.inputtext.AutoCompleteCustomSource.AddRange(new string[] {
+            "readconf",
+            "writeconf",
+            "readraw",
+            "readscaled",
+            "readstatus"});
+            this.inputtext.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.inputtext.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.HistoryList;
+            this.inputtext.Location = new System.Drawing.Point(393, 38);
+            this.inputtext.Name = "inputtext";
+            this.inputtext.Size = new System.Drawing.Size(177, 22);
+            this.inputtext.TabIndex = 15;
+            this.toolTip1.SetToolTip(this.inputtext, "Input command");
             // 
-            // button1
+            // chart1
             // 
-            this.button1.Location = new System.Drawing.Point(629, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "About";
-            this.toolTip1.SetToolTip(this.button1, "About the software");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(770, 15);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "About";
-            this.toolTip1.SetToolTip(this.button2, "About the software");
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // manualbutton
-            // 
-            this.manualbutton.Location = new System.Drawing.Point(29, 33);
-            this.manualbutton.Name = "manualbutton";
-            this.manualbutton.Size = new System.Drawing.Size(116, 33);
-            this.manualbutton.TabIndex = 10;
-            this.manualbutton.Text = "Maual reading";
-            this.manualbutton.UseVisualStyleBackColor = true;
-            this.manualbutton.Click += new System.EventHandler(this.manualbutton_Click);
-            // 
-            // autobutton
-            // 
-            this.autobutton.Location = new System.Drawing.Point(151, 33);
-            this.autobutton.Name = "autobutton";
-            this.autobutton.Size = new System.Drawing.Size(111, 33);
-            this.autobutton.TabIndex = 11;
-            this.autobutton.Text = "Auto reading";
-            this.autobutton.UseVisualStyleBackColor = true;
-            this.autobutton.Click += new System.EventHandler(this.autobutton_Click);
-            // 
-            // readingstextBox
-            // 
-            this.readingstextBox.Location = new System.Drawing.Point(29, 95);
-            this.readingstextBox.Multiline = true;
-            this.readingstextBox.Name = "readingstextBox";
-            this.readingstextBox.Size = new System.Drawing.Size(233, 347);
-            this.readingstextBox.TabIndex = 12;
+            this.chart1.BackColor = System.Drawing.Color.AliceBlue;
+            this.chart1.BorderlineColor = System.Drawing.Color.AliceBlue;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(164, 112);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Vba";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(550, 299);
+            this.chart1.TabIndex = 14;
+            this.chart1.Text = "chart1";
             // 
             // stopbutton
             // 
@@ -416,29 +442,92 @@
             this.stopbutton.UseVisualStyleBackColor = true;
             this.stopbutton.Click += new System.EventHandler(this.stopbutton_Click);
             // 
-            // chart1
+            // readingstextBox
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(302, 95);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Vba";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(516, 347);
-            this.chart1.TabIndex = 14;
-            this.chart1.Text = "chart1";
+            this.readingstextBox.Location = new System.Drawing.Point(29, 95);
+            this.readingstextBox.Multiline = true;
+            this.readingstextBox.Name = "readingstextBox";
+            this.readingstextBox.Size = new System.Drawing.Size(129, 347);
+            this.readingstextBox.TabIndex = 12;
+            // 
+            // autobutton
+            // 
+            this.autobutton.Location = new System.Drawing.Point(151, 33);
+            this.autobutton.Name = "autobutton";
+            this.autobutton.Size = new System.Drawing.Size(111, 33);
+            this.autobutton.TabIndex = 11;
+            this.autobutton.Text = "Auto reading";
+            this.autobutton.UseVisualStyleBackColor = true;
+            this.autobutton.Click += new System.EventHandler(this.autobutton_Click);
+            // 
+            // manualbutton
+            // 
+            this.manualbutton.Location = new System.Drawing.Point(29, 33);
+            this.manualbutton.Name = "manualbutton";
+            this.manualbutton.Size = new System.Drawing.Size(116, 33);
+            this.manualbutton.TabIndex = 10;
+            this.manualbutton.Text = "Maual reading";
+            this.manualbutton.UseVisualStyleBackColor = true;
+            this.manualbutton.Click += new System.EventHandler(this.manualbutton_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(743, 21);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "About";
+            this.toolTip1.SetToolTip(this.button2, "About the software");
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 3000;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(579, 264);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(121, 42);
+            this.button3.TabIndex = 13;
+            this.button3.Text = "Retrieve settings\r\nfrom file\r\n";
+            this.toolTip1.SetToolTip(this.button3, "Save settings, demands username and password");
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // status
+            // 
+            this.status.AutoSize = true;
+            this.status.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.status.Location = new System.Drawing.Point(119, 28);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(160, 16);
+            this.status.TabIndex = 14;
+            this.status.Text = "Show/Change settings";
+            // 
+            // password
+            // 
+            this.password.Location = new System.Drawing.Point(296, 327);
+            this.password.Name = "password";
+            this.password.Size = new System.Drawing.Size(121, 22);
+            this.password.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(302, 309);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(70, 16);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Password:";
             // 
             // retrieve
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(891, 530);
+            this.ClientSize = new System.Drawing.Size(767, 530);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "retrieve";
@@ -468,7 +557,6 @@
         private System.Windows.Forms.Label portlabel;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button connect_button;
-        private System.Windows.Forms.Button next_button;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBoxalarmh;
         private System.Windows.Forms.Label label5;
@@ -483,7 +571,6 @@
         private System.Windows.Forms.Button save_settings_button;
         private System.Windows.Forms.Button retrieve_settings_button;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Diagnostics.Process process1;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button aboutbutton1;
@@ -492,9 +579,17 @@
         private System.Windows.Forms.Button autobutton;
         private System.Windows.Forms.Button manualbutton;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.TextBox readingstextBox;
         private System.Windows.Forms.Button stopbutton;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Button disconnectbutton;
+        private System.Windows.Forms.TextBox readingstextBox;
+        private System.Windows.Forms.Button value_button;
+        private System.Windows.Forms.Button sendbutton;
+        private System.Windows.Forms.TextBox inputtext;
+        private System.Windows.Forms.Label status;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox password;
+        private System.Windows.Forms.Label label6;
     }
 }
 

@@ -13,57 +13,63 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace SoftSensConf
 {
+
     public partial class retrieve : Form
     {
         List<int> analogReading = new List<int>();
+        List<DateTime> timeStamp = new List<DateTime>();
         List<DateTime> voltageDiff = new List<DateTime>();
-        String timeStamp = GetTimestamp(DateTime.Now);
 
-        public static String GetTimestamp(DateTime value)
+        private static string GetTimestamp(DateTime now)
         {
-            return value.ToString("yyyyMMddHHmmssffff");
+            throw new NotImplementedException();
         }
 
-        public retrieve()
-        {
-            InitializeComponent();
-            timer1.Interval = 5000;
-            timer1.Tick += new EventHandler(timer1_Tick);
-            comboBox2.Text = comboBox2.Items[2].ToString();
-            comboBox1.Items.Clear();
-            comboBox1.Items.AddRange(SerialPort.GetPortNames());
-            comboBox1.Text = comboBox1.Items[0].ToString();
-            
-                
-        }
 
         void DataRecievedHandler(object sender, SerialDataReceivedEventArgs e)
         {
             int iVab;
             string RecievedData = ((SerialPort)sender).ReadLine();
-            readingstextBox.Invoke((MethodInvoker) delegate 
-            {readingstextBox.AppendText("Recieved:" + RecievedData + "\r\n");});
-            string[] separateParts= RecievedData.Split(';');
-            if (int.TryParse(separateParts[2],out iVab))
-           
-
+            readingstextBox.Invoke((MethodInvoker)delegate { readingstextBox.AppendText("Recieved: " + RecievedData + "\r\n"); });
+            string[] separateParts = RecievedData.Split(';');
+            if (int.TryParse(separateParts[2], out iVab))
             {
                 analogReading.Add(iVab);
-                //timeStamp.Add(DateTime.Now);
+                timeStamp.Add(DateTime.Now);
                 chart1.Series["Vba"].Points.DataBindXY(timeStamp, analogReading);
                 chart1.Invalidate();
             }
             else
             {
-                MessageBox.Show("Something went wrong");
+                MessageBox.Show("Gikk Ikke.");
             }
         }
-            
 
-        private void timer1_Tick(object sender, EventArgs e)
+            private void timer1_Tick(object sender, EventArgs e)
         {
-            serialPort1.WriteLine("Read analog");
+            serialPort1.WriteLine("readscaled");
+            char[] charstotrim = { 'r', 'e', 'a', 'd', 's', ';', 'c', 'l' };
+            string result = serialPort1.ReadLine().Trim(charstotrim);
+            readingstextBox.AppendText(result + "\r\n");
         }
+        public retrieve()
+        {
+            InitializeComponent();
+            timer1.Interval = 3000;
+            timer1.Tick += new EventHandler(timer1_Tick);
+            comboBox2.Text = comboBox2.Items[2].ToString();
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(SerialPort.GetPortNames());
+            comboBox1.Text = comboBox1.Items[0].ToString();
+            //serialPort1.DataReceived += new SerialDataReceivedEventHandler(DataRecievedHandler);
+        }
+
+        // Display the password form.
+ 
+
+
+
+
         private void connect_Click(object sender, EventArgs e)
         {
             serialPort1.PortName = comboBox1.Text;
@@ -73,44 +79,47 @@ namespace SoftSensConf
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           // comboBox1.Items.Clear();
+            // comboBox1.Items.Clear();
             //comboBox1.Items.AddRange(SerialPort.GetPortNames());
 
         }
 
         private void connect_button_Click(object sender, EventArgs e)
         {
+            status.Text = " ";
             try
             {
                 serialPort1.PortName = comboBox1.Text;
                 serialPort1.Open();
                 if (serialPort1.IsOpen)
                 {
-                    textBox1.AppendText("Connected \r\n");
+                    textBox1.Text = "Connected to " + comboBox1.Text + "\r\n";
+                    textBox1.BackColor = Color.Honeydew;
                 }
                 else
                 {
-                    textBox1.AppendText("Not connected to usnTopSens.\r\n");
+                    textBox1.AppendText("Device not connected. Please try again.\r\n");
                 }
             }
             catch (Exception IOException)
             {
-                MessageBox.Show("Check that your instrument is connected.");
+                
             }
-        
+
         }
 
         private void save_settings_button_Click(object sender, EventArgs e)
         {
-
-            StreamWriter outputFile = new StreamWriter(@"C:\tmp\Text1.tmp");
+            status.Text = " ";
+            StreamWriter outputFile = new StreamWriter(@"C:\tmp\Config.tmp");
             outputFile.WriteLine(textBox7);
             outputFile.Close();
-            //MessageBox.Show("New settings saved.");
+            MessageBox.Show("New settings saved.");
         }
 
         private void retrieve_settings_button_Click(object sender, EventArgs e)
         {
+            status.Text = "Configuration saved on device:";
             try
             {
                 textBoxname.Text = "";
@@ -119,7 +128,7 @@ namespace SoftSensConf
                 textBoxalarml.Text = "";
                 textBoxalarmh.Text = "";
 
-                StreamReader inputFile = new StreamReader(@"C:\tmp\Text1.tmp");
+                StreamReader inputFile = new StreamReader(@"C:\tmp\Config.tmp");
                 textBox7.Text = inputFile.ReadToEnd();
                 inputFile.Close();
 
@@ -135,11 +144,53 @@ namespace SoftSensConf
             }
             catch (Exception IndexOutOfRangeException)
             {
-                MessageBox.Show("Something went wrong.");
+                MessageBox.Show("No values saved. Showing default values.");
             }
 
+            finally
+            {
+                textBoxname.Text = "C385IT001";
+                textBoxlrv.Text = "0.0";
+                textBoxurv.Text = "500.0";
+                textBoxalarml.Text = "40";
+                textBoxalarmh.Text = "440";
+                textBox7.Text = textBoxname.Text + ";" + textBoxlrv.Text + ";" + textBoxurv.Text + ";" + textBoxalarml.Text + ";" + textBoxalarmh.Text;
+
+            }
+        
         }
 
+        private void value_button_Click(object sender, EventArgs e)
+        {
+            if (password.Text == string.Empty)
+            {
+                var message = "Password required.";
+                var title = string.Empty;
+                var result = MessageBox.Show(message, title,MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            else
+            {
+             
+
+                serialPort1.WriteLine("writeconf>" + password.Text + ">" + textBoxname.Text + ";" + textBoxlrv.Text + ";" + textBoxurv.Text + ";" + textBoxalarml.Text + ";" + textBoxalarmh.Text);
+                string svar = serialPort1.ReadLine();
+
+                if (svar != null)
+                {
+                    textBox7.Text = "Configuration changed";
+                }
+
+                else
+                {
+                    textBox7.Text = "Check your password again.";
+                }
+            }
+
+
+
+        }
+    
         private void aboutbutton1_Click(object sender, EventArgs e)
         {
             AboutBox1 aboutWindow = new AboutBox1();
@@ -163,28 +214,103 @@ namespace SoftSensConf
         {
             try
             {
-                serialPort1.WriteLine("readanalog");
-                readingstextBox.AppendText(serialPort1.ReadLine());
-                readingstextBox.AppendText("\r\n");
+                serialPort1.WriteLine("readscaled");
+                char[] charstotrim = { 'r', 'e', 'a', 'd', 's', ';', 'c', 'l' };
+                string result = serialPort1.ReadLine().Trim(charstotrim);
+                readingstextBox.AppendText(result + "\r\n");
+                
+                
                 timer1.Stop();
             }
             catch (Exception InvalidOperationException)
             {
-                MessageBox.Show("Something went wrong");    
+                MessageBox.Show("Something went wrong");
             }
         }
 
         private void autobutton_Click(object sender, EventArgs e)
         {
-            serialPort1.WriteLine("readanalog");
-            readingstextBox.AppendText(serialPort1.ReadLine());
-            readingstextBox.AppendText("\r\n");
-            timer1.Start();
+            if (serialPort1.IsOpen)
+            {
+                readingstextBox.AppendText("Autoreading started \r\n");
+                timer1.Start();
+                serialPort1.WriteLine("readscaled");
+                char[] charstotrim = { 'r', 'e', 'a', 'd', 's', ';', 'c', 'l' };
+                string result = serialPort1.ReadLine().Trim(charstotrim);
+                readingstextBox.AppendText(result + "\r\n");
+
+            }
+
+            else
+            {
+                readingstextBox.Text = "Port is closed.\r\n";
+            }
+       
         }
 
         private void stopbutton_Click(object sender, EventArgs e)
         {
             timer1.Stop();
+            readingstextBox.AppendText("Autoreading stopped \r\n");
+
+
+            var message = "Save readings to file?";
+            var title = "Save?";
+            var result = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            switch (result)
+            {
+                case DialogResult.Yes:
+                    MessageBox.Show("Readings saved to file.");
+                    string tittel = "Readings " + DateTime.Now + ".csv";
+
+                    List<int> avlesninger = new List<int>();
+
+                    using (StringReader reader = new StringReader(readingstextBox.Text))
+                    {
+                        string line;
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            avlesninger.Add(int.Parse(line));
+                        }
+                    }
+                    StreamWriter outputFile = new StreamWriter(@"C:\tmp\"+tittel+".csv");
+                    foreach (int line in avlesninger)
+                    {
+                        outputFile.WriteLine(avlesninger);
+                    }
+                    outputFile.Close();
+
+                    // You can convert it back to an array if you would like to
+                    //int[] terms = avlesninger.ToArray();
+
+
+
+                    break;
+                case DialogResult.No:   
+                    MessageBox.Show("Readings not saved.");
+                    break;
+            }
+
+        }
+
+        private void disconnectbutton_Click(object sender, EventArgs e)
+        {
+            serialPort1.Close();
+            textBox1.Text = "Disconnected from " + comboBox1.Text + "\r\n";
+            textBox1.BackColor = Color.MistyRose;
+        }
+
+
+        private void sendbutton_Click(object sender, EventArgs e)
+        {
+            serialPort1.WriteLine(inputtext.Text);
+            readingstextBox.Text = serialPort1.ReadLine() + "\r\n";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            status.Text = "Configuration saved on file:";
         }
     }
 }
