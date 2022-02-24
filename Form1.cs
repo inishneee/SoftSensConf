@@ -52,11 +52,46 @@ namespace SoftSensConf
             string result = serialPort1.ReadLine().Trim(charstotrim);
             readingstextBox.AppendText(result + "\r\n");
         }
+            private void timer2_Tick(object sender, EventArgs e)
+        {
+            serialPort1.WriteLine("readstatus");
+            char[] charstotrim = { 'r', 'e', 'a', 'd', 's', 't', 'u', ' ', ';', ':' };
+           // textBox2.Text = serialPort1.ReadLine().Trim(charstotrim).ToString();
+            
+            if (int.Parse(serialPort1.ReadLine().Trim(charstotrim)) == 0)
+            {
+                statusupdate.Text = "Ok";
+            }
+            else if (int.Parse(serialPort1.ReadLine().Trim(charstotrim)) == 1)
+            {
+                statusupdate.Text = "Fail!";
+                statusupdate.BackColor = Color.MistyRose;
+                label8.BackColor = Color.MistyRose;
+            }
+            else if (int.Parse(serialPort1.ReadLine().Trim(charstotrim)) == 2)
+            {
+                statusupdate.Text = "Alarm low!";
+                statusupdate.BackColor = Color.MistyRose;
+                label8.BackColor = Color.MistyRose;
+            }
+            else if (int.Parse(serialPort1.ReadLine().Trim(charstotrim)) == 3)
+            {
+                statusupdate.Text = "Alarm high!";
+                statusupdate.BackColor = Color.MistyRose;
+                label8.BackColor = Color.MistyRose;
+            }
+            else
+            {
+                statusupdate.Text = "Not available";
+            }
+        }
         public retrieve()
         {
             InitializeComponent();
             timer1.Interval = 3000;
             timer1.Tick += new EventHandler(timer1_Tick);
+            timer2.Interval = 4500;
+            timer2.Tick += new EventHandler(timer2_Tick);
             comboBox2.Text = comboBox2.Items[2].ToString();
             comboBox1.Items.Clear();
             comboBox1.Items.AddRange(SerialPort.GetPortNames());
@@ -70,13 +105,13 @@ namespace SoftSensConf
 
 
 
-        private void connect_Click(object sender, EventArgs e)
+        /*private void connect_Click(object sender, EventArgs e)
         {
             serialPort1.PortName = comboBox1.Text;
             serialPort1.Open();
             //skal også skrive til textBox1 hvilke verdier som allerede er lagret i arduinoen
         }
-
+        */
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             // comboBox1.Items.Clear();
@@ -86,9 +121,10 @@ namespace SoftSensConf
 
         private void connect_button_Click(object sender, EventArgs e)
         {
+            statusupdate.Text = " ";
             label7.Text = " ";
-            label8.Text = " ";
             status.Text = " ";
+            timer2.Start();
             try
             {
                 serialPort1.PortName = comboBox1.Text;
@@ -290,17 +326,13 @@ namespace SoftSensConf
 
         private void disconnectbutton_Click(object sender, EventArgs e)
         {
+            timer2.Stop();
             serialPort1.Close();
             textBox1.Text = "Disconnected from " + comboBox1.Text + "\r\n";
             textBox1.BackColor = Color.MistyRose;
+            statusupdate.Text = " ";
         }
 
-
-        private void sendbutton_Click(object sender, EventArgs e)
-        {
-            serialPort1.WriteLine(inputtext.Text);
-            readingstextBox.Text = serialPort1.ReadLine() + "\r\n";
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {

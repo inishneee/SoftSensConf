@@ -62,8 +62,6 @@
             this.save_settings_button = new System.Windows.Forms.Button();
             this.retrieve_settings_button = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.sendbutton = new System.Windows.Forms.Button();
-            this.inputtext = new System.Windows.Forms.TextBox();
             this.stopbutton = new System.Windows.Forms.Button();
             this.readingstextBox = new System.Windows.Forms.TextBox();
             this.autobutton = new System.Windows.Forms.Button();
@@ -78,6 +76,8 @@
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.statusupdate = new System.Windows.Forms.Label();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -374,11 +374,10 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPage3.Controls.Add(this.statusupdate);
             this.tabPage3.Controls.Add(this.label8);
             this.tabPage3.Controls.Add(this.label7);
             this.tabPage3.Controls.Add(this.chart1);
-            this.tabPage3.Controls.Add(this.sendbutton);
-            this.tabPage3.Controls.Add(this.inputtext);
             this.tabPage3.Controls.Add(this.stopbutton);
             this.tabPage3.Controls.Add(this.readingstextBox);
             this.tabPage3.Controls.Add(this.autobutton);
@@ -390,32 +389,6 @@
             this.tabPage3.Size = new System.Drawing.Size(727, 474);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Sensor data";
-            // 
-            // sendbutton
-            // 
-            this.sendbutton.Location = new System.Drawing.Point(576, 33);
-            this.sendbutton.Name = "sendbutton";
-            this.sendbutton.Size = new System.Drawing.Size(138, 30);
-            this.sendbutton.TabIndex = 16;
-            this.sendbutton.Text = "Send command";
-            this.sendbutton.UseVisualStyleBackColor = true;
-            this.sendbutton.Click += new System.EventHandler(this.sendbutton_Click);
-            // 
-            // inputtext
-            // 
-            this.inputtext.AutoCompleteCustomSource.AddRange(new string[] {
-            "readconf",
-            "writeconf",
-            "readraw",
-            "readscaled",
-            "readstatus"});
-            this.inputtext.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.inputtext.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.HistoryList;
-            this.inputtext.Location = new System.Drawing.Point(393, 38);
-            this.inputtext.Name = "inputtext";
-            this.inputtext.Size = new System.Drawing.Size(177, 22);
-            this.inputtext.TabIndex = 15;
-            this.toolTip1.SetToolTip(this.inputtext, "Input command");
             // 
             // stopbutton
             // 
@@ -535,11 +508,20 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(32, 7);
+            this.label8.Location = new System.Drawing.Point(556, 41);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(44, 16);
             this.label8.TabIndex = 19;
-            this.label8.Text = "label8";
+            this.label8.Text = "Status";
+            // 
+            // statusupdate
+            // 
+            this.statusupdate.AutoSize = true;
+            this.statusupdate.Location = new System.Drawing.Point(595, 41);
+            this.statusupdate.Name = "statusupdate";
+            this.statusupdate.Size = new System.Drawing.Size(44, 16);
+            this.statusupdate.TabIndex = 20;
+            this.statusupdate.Text = "label9";
             // 
             // retrieve
             // 
@@ -602,8 +584,6 @@
         private System.Windows.Forms.Button disconnectbutton;
         private System.Windows.Forms.TextBox readingstextBox;
         private System.Windows.Forms.Button value_button;
-        private System.Windows.Forms.Button sendbutton;
-        private System.Windows.Forms.TextBox inputtext;
         private System.Windows.Forms.Label status;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox password;
@@ -611,6 +591,8 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label statusupdate;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 
