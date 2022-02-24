@@ -86,6 +86,8 @@ namespace SoftSensConf
 
         private void connect_button_Click(object sender, EventArgs e)
         {
+            label7.Text = " ";
+            label8.Text = " ";
             status.Text = " ";
             try
             {
@@ -232,7 +234,7 @@ namespace SoftSensConf
         {
             if (serialPort1.IsOpen)
             {
-                readingstextBox.AppendText("Autoreading started \r\n");
+                label7.Text = "Autoreading started";
                 timer1.Start();
                 serialPort1.WriteLine("readscaled");
                 char[] charstotrim = { 'r', 'e', 'a', 'd', 's', ';', 'c', 'l' };
@@ -251,7 +253,7 @@ namespace SoftSensConf
         private void stopbutton_Click(object sender, EventArgs e)
         {
             timer1.Stop();
-            readingstextBox.AppendText("Autoreading stopped \r\n");
+            label7.Text = "Autoreading stopped";
 
 
             var message = "Save readings to file?";
@@ -262,29 +264,21 @@ namespace SoftSensConf
             {
                 case DialogResult.Yes:
                     MessageBox.Show("Readings saved to file.");
-                    string tittel = "Readings " + DateTime.Now + ".csv";
+                    string tittel = "SSC_Readings";
+                    List<string> avlesninger = new List<string>();
 
-                    List<int> avlesninger = new List<int>();
 
                     using (StringReader reader = new StringReader(readingstextBox.Text))
                     {
                         string line;
                         while ((line = reader.ReadLine()) != null)
                         {
-                            avlesninger.Add(int.Parse(line));
-                        }
+                            avlesninger.Add(line);                        }
                     }
-                    StreamWriter outputFile = new StreamWriter(@"C:\tmp\"+tittel+".csv");
-                    foreach (int line in avlesninger)
-                    {
-                        outputFile.WriteLine(avlesninger);
-                    }
-                    outputFile.Close();
-
-                    // You can convert it back to an array if you would like to
-                    //int[] terms = avlesninger.ToArray();
-
-
+                   
+                    //label8.Text = "idag er det" + DateTime.Now;
+                 
+                   File.WriteAllLines(@"C:\tmp\"+tittel+".csv", avlesninger);
 
                     break;
                 case DialogResult.No:   

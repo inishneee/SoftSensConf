@@ -64,7 +64,6 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.sendbutton = new System.Windows.Forms.Button();
             this.inputtext = new System.Windows.Forms.TextBox();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.stopbutton = new System.Windows.Forms.Button();
             this.readingstextBox = new System.Windows.Forms.TextBox();
             this.autobutton = new System.Windows.Forms.Button();
@@ -76,6 +75,9 @@
             this.status = new System.Windows.Forms.Label();
             this.password = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -372,9 +374,11 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.label7);
+            this.tabPage3.Controls.Add(this.chart1);
             this.tabPage3.Controls.Add(this.sendbutton);
             this.tabPage3.Controls.Add(this.inputtext);
-            this.tabPage3.Controls.Add(this.chart1);
             this.tabPage3.Controls.Add(this.stopbutton);
             this.tabPage3.Controls.Add(this.readingstextBox);
             this.tabPage3.Controls.Add(this.autobutton);
@@ -412,25 +416,6 @@
             this.inputtext.Size = new System.Drawing.Size(177, 22);
             this.inputtext.TabIndex = 15;
             this.toolTip1.SetToolTip(this.inputtext, "Input command");
-            // 
-            // chart1
-            // 
-            this.chart1.BackColor = System.Drawing.Color.AliceBlue;
-            this.chart1.BorderlineColor = System.Drawing.Color.AliceBlue;
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(164, 112);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Vba";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(550, 299);
-            this.chart1.TabIndex = 14;
-            this.chart1.Text = "chart1";
             // 
             // stopbutton
             // 
@@ -522,6 +507,40 @@
             this.label6.TabIndex = 16;
             this.label6.Text = "Password:";
             // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(176, 95);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Vba";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(538, 347);
+            this.chart1.TabIndex = 17;
+            this.chart1.Text = "chart1";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(29, 73);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 16);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "label7";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(32, 7);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(44, 16);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "label8";
+            // 
             // retrieve
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -580,7 +599,6 @@
         private System.Windows.Forms.Button manualbutton;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button stopbutton;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Button disconnectbutton;
         private System.Windows.Forms.TextBox readingstextBox;
         private System.Windows.Forms.Button value_button;
@@ -590,6 +608,9 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox password;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
     }
 }
 
