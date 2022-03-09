@@ -36,7 +36,8 @@
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.disconnectbutton = new System.Windows.Forms.Button();
             this.aboutbutton1 = new System.Windows.Forms.Button();
             this.connect_button = new System.Windows.Forms.Button();
@@ -45,6 +46,11 @@
             this.portlabel = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.password = new System.Windows.Forms.TextBox();
+            this.status = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.value_button = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
@@ -62,6 +68,15 @@
             this.save_settings_button = new System.Windows.Forms.Button();
             this.retrieve_settings_button = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.textBox = new System.Windows.Forms.TextBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.statusupdate = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.stopbutton = new System.Windows.Forms.Button();
             this.readingstextBox = new System.Windows.Forms.TextBox();
             this.autobutton = new System.Windows.Forms.Button();
@@ -69,15 +84,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button3 = new System.Windows.Forms.Button();
-            this.status = new System.Windows.Forms.Label();
-            this.password = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.statusupdate = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -100,7 +109,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.AliceBlue;
-            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.label12);
+            this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.disconnectbutton);
             this.tabPage1.Controls.Add(this.aboutbutton1);
             this.tabPage1.Controls.Add(this.connect_button);
@@ -115,13 +125,24 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Connect";
             // 
-            // textBox1
+            // label12
             // 
-            this.textBox1.Location = new System.Drawing.Point(230, 60);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(186, 31);
-            this.textBox1.TabIndex = 4;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(222, 60);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(13, 16);
+            this.label12.TabIndex = 11;
+            this.label12.Text = "  ";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(550, 455);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(13, 16);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "  ";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // disconnectbutton
             // 
@@ -130,13 +151,14 @@
             this.disconnectbutton.Size = new System.Drawing.Size(121, 26);
             this.disconnectbutton.TabIndex = 9;
             this.disconnectbutton.Text = "Disconnect";
+            this.toolTip1.SetToolTip(this.disconnectbutton, "Disconnect from device");
             this.disconnectbutton.UseVisualStyleBackColor = true;
             this.disconnectbutton.Click += new System.EventHandler(this.disconnectbutton_Click);
             // 
             // aboutbutton1
             // 
             this.aboutbutton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.aboutbutton1.Location = new System.Drawing.Point(444, 15);
+            this.aboutbutton1.Location = new System.Drawing.Point(637, 15);
             this.aboutbutton1.Name = "aboutbutton1";
             this.aboutbutton1.Size = new System.Drawing.Size(75, 23);
             this.aboutbutton1.TabIndex = 8;
@@ -152,7 +174,7 @@
             this.connect_button.Size = new System.Drawing.Size(121, 25);
             this.connect_button.TabIndex = 5;
             this.connect_button.Text = "Connect";
-            this.toolTip1.SetToolTip(this.connect_button, "Connect to usnTopSens");
+            this.toolTip1.SetToolTip(this.connect_button, "Connect to device");
             this.connect_button.UseVisualStyleBackColor = true;
             this.connect_button.Click += new System.EventHandler(this.connect_button_Click);
             // 
@@ -178,6 +200,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 24);
             this.comboBox2.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.comboBox2, "Choose bitrate");
             // 
             // portlabel
             // 
@@ -195,11 +218,13 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.comboBox1, "Connection port");
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.password);
             this.tabPage2.Controls.Add(this.status);
@@ -217,6 +242,54 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(550, 455);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(13, 16);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "  ";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(302, 309);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(70, 16);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Password:";
+            // 
+            // password
+            // 
+            this.password.Location = new System.Drawing.Point(296, 327);
+            this.password.Name = "password";
+            this.password.Size = new System.Drawing.Size(121, 22);
+            this.password.TabIndex = 15;
+            this.toolTip1.SetToolTip(this.password, "Enter password to change values");
+            // 
+            // status
+            // 
+            this.status.AutoSize = true;
+            this.status.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.status.Location = new System.Drawing.Point(54, 31);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(140, 16);
+            this.status.TabIndex = 14;
+            this.status.Text = "Show/Change settings";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(579, 264);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(121, 42);
+            this.button3.TabIndex = 13;
+            this.button3.Text = "Retrieve settings\r\nfrom file\r\n";
+            this.toolTip1.SetToolTip(this.button3, "Save settings, demands username and password");
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // value_button
             // 
             this.value_button.Location = new System.Drawing.Point(296, 264);
@@ -230,7 +303,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(596, 21);
+            this.button1.Location = new System.Drawing.Point(637, 15);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 9;
@@ -246,6 +319,7 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(264, 195);
             this.textBox7.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.textBox7, "Readings");
             // 
             // panel1
             // 
@@ -374,6 +448,13 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPage3.Controls.Add(this.button6);
+            this.tabPage3.Controls.Add(this.button5);
+            this.tabPage3.Controls.Add(this.textBox);
+            this.tabPage3.Controls.Add(this.comboBox3);
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Controls.Add(this.button4);
+            this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.statusupdate);
             this.tabPage3.Controls.Add(this.label8);
             this.tabPage3.Controls.Add(this.label7);
@@ -390,41 +471,141 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Sensor data";
             // 
+            // textBox
+            // 
+            this.textBox.BackColor = System.Drawing.Color.AliceBlue;
+            this.textBox.Location = new System.Drawing.Point(-4, 470);
+            this.textBox.Multiline = true;
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(303, 10);
+            this.textBox.TabIndex = 25;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "readraw",
+            "readscaled"});
+            this.comboBox3.Location = new System.Drawing.Point(97, 60);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(111, 24);
+            this.comboBox3.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.comboBox3, "Choose type of reading");
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(94, 62);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(0, 16);
+            this.label13.TabIndex = 24;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(637, 15);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 23;
+            this.button4.Text = "About";
+            this.toolTip1.SetToolTip(this.button4, "About the software");
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(550, 455);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(13, 16);
+            this.label11.TabIndex = 21;
+            this.label11.Text = "  ";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // statusupdate
+            // 
+            this.statusupdate.AutoSize = true;
+            this.statusupdate.Location = new System.Drawing.Point(622, 67);
+            this.statusupdate.Name = "statusupdate";
+            this.statusupdate.Size = new System.Drawing.Size(13, 16);
+            this.statusupdate.TabIndex = 20;
+            this.statusupdate.Text = "  ";
+            this.toolTip1.SetToolTip(this.statusupdate, "Status/alarm control");
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(569, 67);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(47, 16);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Status:";
+            this.toolTip1.SetToolTip(this.label8, "Status/alarm control");
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(15, 95);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(13, 16);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "  ";
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(151, 95);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Vba";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(563, 347);
+            this.chart1.TabIndex = 17;
+            this.chart1.Text = "chart1";
+            // 
             // stopbutton
             // 
-            this.stopbutton.Location = new System.Drawing.Point(268, 33);
+            this.stopbutton.Location = new System.Drawing.Point(268, 21);
             this.stopbutton.Name = "stopbutton";
             this.stopbutton.Size = new System.Drawing.Size(119, 33);
             this.stopbutton.TabIndex = 13;
-            this.stopbutton.Text = "Stop reading";
+            this.stopbutton.Text = "Stop ";
+            this.toolTip1.SetToolTip(this.stopbutton, "Push to stop autoreading\r\nand save readings\r\n");
             this.stopbutton.UseVisualStyleBackColor = true;
             this.stopbutton.Click += new System.EventHandler(this.stopbutton_Click);
             // 
             // readingstextBox
             // 
-            this.readingstextBox.Location = new System.Drawing.Point(29, 95);
+            this.readingstextBox.Location = new System.Drawing.Point(29, 115);
             this.readingstextBox.Multiline = true;
             this.readingstextBox.Name = "readingstextBox";
-            this.readingstextBox.Size = new System.Drawing.Size(129, 347);
+            this.readingstextBox.Size = new System.Drawing.Size(94, 327);
             this.readingstextBox.TabIndex = 12;
             // 
             // autobutton
             // 
-            this.autobutton.Location = new System.Drawing.Point(151, 33);
+            this.autobutton.Location = new System.Drawing.Point(151, 21);
             this.autobutton.Name = "autobutton";
             this.autobutton.Size = new System.Drawing.Size(111, 33);
             this.autobutton.TabIndex = 11;
-            this.autobutton.Text = "Auto reading";
+            this.autobutton.Text = "Auto ";
+            this.toolTip1.SetToolTip(this.autobutton, "Push to get autoreading");
             this.autobutton.UseVisualStyleBackColor = true;
             this.autobutton.Click += new System.EventHandler(this.autobutton_Click);
             // 
             // manualbutton
             // 
-            this.manualbutton.Location = new System.Drawing.Point(29, 33);
+            this.manualbutton.Location = new System.Drawing.Point(29, 21);
             this.manualbutton.Name = "manualbutton";
             this.manualbutton.Size = new System.Drawing.Size(116, 33);
             this.manualbutton.TabIndex = 10;
-            this.manualbutton.Text = "Maual reading";
+            this.manualbutton.Text = "Manual ";
+            this.toolTip1.SetToolTip(this.manualbutton, "Get one reading");
             this.manualbutton.UseVisualStyleBackColor = true;
             this.manualbutton.Click += new System.EventHandler(this.manualbutton_Click);
             // 
@@ -443,85 +624,27 @@
             // 
             this.timer1.Interval = 3000;
             // 
-            // button3
+            // button5
             // 
-            this.button3.Location = new System.Drawing.Point(579, 264);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(121, 42);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "Retrieve settings\r\nfrom file\r\n";
-            this.toolTip1.SetToolTip(this.button3, "Save settings, demands username and password");
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button5.Location = new System.Drawing.Point(393, 21);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(119, 33);
+            this.button5.TabIndex = 26;
+            this.button5.Text = "Save ";
+            this.toolTip1.SetToolTip(this.button5, "Push to stop autoreading\r\nand save readings\r\n");
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // status
+            // button6
             // 
-            this.status.AutoSize = true;
-            this.status.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.status.Location = new System.Drawing.Point(119, 28);
-            this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(160, 16);
-            this.status.TabIndex = 14;
-            this.status.Text = "Show/Change settings";
-            // 
-            // password
-            // 
-            this.password.Location = new System.Drawing.Point(296, 327);
-            this.password.Name = "password";
-            this.password.Size = new System.Drawing.Size(121, 22);
-            this.password.TabIndex = 15;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(302, 309);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 16);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Password:";
-            // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(176, 95);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Vba";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(538, 347);
-            this.chart1.TabIndex = 17;
-            this.chart1.Text = "chart1";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(29, 73);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 16);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "label7";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(556, 41);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(44, 16);
-            this.label8.TabIndex = 19;
-            this.label8.Text = "Status";
-            // 
-            // statusupdate
-            // 
-            this.statusupdate.AutoSize = true;
-            this.statusupdate.Location = new System.Drawing.Point(595, 41);
-            this.statusupdate.Name = "statusupdate";
-            this.statusupdate.Size = new System.Drawing.Size(44, 16);
-            this.statusupdate.TabIndex = 20;
-            this.statusupdate.Text = "label9";
+            this.button6.Location = new System.Drawing.Point(516, 21);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(119, 33);
+            this.button6.TabIndex = 27;
+            this.button6.Text = "Clear ";
+            this.toolTip1.SetToolTip(this.button6, "Push to stop autoreading\r\nand save readings\r\n");
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // retrieve
             // 
@@ -552,7 +675,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label bitratelabel;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label portlabel;
@@ -593,6 +715,16 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label statusupdate;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
     }
 }
 

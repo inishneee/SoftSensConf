@@ -11,53 +11,61 @@ using System.IO.Ports;
 using System.IO;
 using System.Windows.Forms.DataVisualization.Charting;
 
+
 namespace SoftSensConf
 {
 
     public partial class retrieve : Form
     {
-        List<int> analogReading = new List<int>();
-        List<DateTime> timeStamp = new List<DateTime>();
-        List<DateTime> voltageDiff = new List<DateTime>();
+        DateTime TimeStamp = DateTime.Now;
+        List<DateTime> TimeList = new List<DateTime>();
+        List<string> avlesninger = new List<string>();
+        List<string> tid = new List<string>();
+        List<string> ts = new List<string>();
+        int i = 0;
 
-        private static string GetTimestamp(DateTime now)
+        public retrieve()
         {
-            throw new NotImplementedException();
+            InitializeComponent();
+            timer1.Interval = 5000;
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer2.Interval = 4500;
+            timer2.Tick += new EventHandler(timer2_Tick);
+            comboBox2.Text = comboBox2.Items[2].ToString();
+            comboBox1.Items.Clear();
+            comboBox1.Items.AddRange(SerialPort.GetPortNames());
+            comboBox1.Text = comboBox1.Items[0].ToString();
+            comboBox3.Text = comboBox3.Items[1].ToString();
+
         }
 
-
-        void DataRecievedHandler(object sender, SerialDataReceivedEventArgs e)
+ 
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            int iVab;
-            string RecievedData = ((SerialPort)sender).ReadLine();
-            readingstextBox.Invoke((MethodInvoker)delegate { readingstextBox.AppendText("Recieved: " + RecievedData + "\r\n"); });
-            string[] separateParts = RecievedData.Split(';');
-            if (int.TryParse(separateParts[2], out iVab))
-            {
-                analogReading.Add(iVab);
-                timeStamp.Add(DateTime.Now);
-                chart1.Series["Vba"].Points.DataBindXY(timeStamp, analogReading);
-                chart1.Invalidate();
-            }
-            else
-            {
-                MessageBox.Show("Gikk Ikke.");
-            }
-        }
-
-            private void timer1_Tick(object sender, EventArgs e)
-        {
-            serialPort1.WriteLine("readscaled");
-            char[] charstotrim = { 'r', 'e', 'a', 'd', 's', ';', 'c', 'l' };
+            
+            serialPort1.WriteLine(comboBox3.SelectedItem.ToString());
+            char[] charstotrim = { 'r', 'e', 'a', 'd', 's', ';', 'c', 'l', 'w', ':' };
             string result = serialPort1.ReadLine().Trim(charstotrim);
+            
+            List<string> avlesninger = new List<string>();
+            DateTime now = DateTime.Now ;
+            String timetrack = DateTime.Now.ToString();
+            TimeList.Add(now);
+            tid.Add(now.ToString("dd/MM/yy HH.mm:ss"));
+            avlesninger.Add(result);
+            chart1.Series[0].XValueType = ChartValueType.DateTime;
+
+            chart1.Series[0].Points.AddXY(now.ToString("HH:mm:ss"), result);
+            i += 2;
+            
+            textBox.AppendText(now.ToString("dd/MM/yyyy,HH:mm:ss")+";" + result+ ";\r\n");
             readingstextBox.AppendText(result + "\r\n");
         }
-            private void timer2_Tick(object sender, EventArgs e)
+        private void timer2_Tick(object sender, EventArgs e)
         {
             serialPort1.WriteLine("readstatus");
             char[] charstotrim = { 'r', 'e', 'a', 'd', 's', 't', 'u', ' ', ';', ':' };
-           // textBox2.Text = serialPort1.ReadLine().Trim(charstotrim).ToString();
-            
+
             if (int.Parse(serialPort1.ReadLine().Trim(charstotrim)) == 0)
             {
                 statusupdate.Text = "Ok";
@@ -85,38 +93,10 @@ namespace SoftSensConf
                 statusupdate.Text = "Not available";
             }
         }
-        public retrieve()
-        {
-            InitializeComponent();
-            timer1.Interval = 3000;
-            timer1.Tick += new EventHandler(timer1_Tick);
-            timer2.Interval = 4500;
-            timer2.Tick += new EventHandler(timer2_Tick);
-            comboBox2.Text = comboBox2.Items[2].ToString();
-            comboBox1.Items.Clear();
-            comboBox1.Items.AddRange(SerialPort.GetPortNames());
-            comboBox1.Text = comboBox1.Items[0].ToString();
-            //serialPort1.DataReceived += new SerialDataReceivedEventHandler(DataRecievedHandler);
-        }
-
-        // Display the password form.
- 
-
-
-
-
-        /*private void connect_Click(object sender, EventArgs e)
-        {
-            serialPort1.PortName = comboBox1.Text;
-            serialPort1.Open();
-            //skal også skrive til textBox1 hvilke verdier som allerede er lagret i arduinoen
-        }
-        */
+       
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // comboBox1.Items.Clear();
-            //comboBox1.Items.AddRange(SerialPort.GetPortNames());
-
+     
         }
 
         private void connect_button_Click(object sender, EventArgs e)
@@ -131,24 +111,29 @@ namespace SoftSensConf
                 serialPort1.Open();
                 if (serialPort1.IsOpen)
                 {
-                    textBox1.Text = "Connected to " + comboBox1.Text + "\r\n";
-                    textBox1.BackColor = Color.Honeydew;
+                    label9.Text = "Connected to " + comboBox1.Text + "\r\n";
+                    label9.BackColor = Color.Honeydew;
+                    label10.Text = "Connected to " + comboBox1.Text + "\r\n";
+                    label10.BackColor = Color.Honeydew;
+                    label11.Text = "Connected to " + comboBox1.Text + "\r\n";
+                    label11.BackColor = Color.Honeydew;
+                    label12.Text = "Connected to " + comboBox1.Text + "\r\n";
+                    label12.BackColor = Color.Honeydew;
                 }
                 else
                 {
-                    textBox1.AppendText("Device not connected. Please try again.\r\n");
+                    label12.Text = "Device not connected. Please try again.";
                 }
             }
             catch (Exception IOException)
-            {
-                
+            {       
             }
-
         }
 
         private void save_settings_button_Click(object sender, EventArgs e)
         {
             status.Text = " ";
+
             StreamWriter outputFile = new StreamWriter(@"C:\tmp\Config.tmp");
             outputFile.WriteLine(textBox7);
             outputFile.Close();
@@ -171,7 +156,6 @@ namespace SoftSensConf
                 inputFile.Close();
 
                 string inputard = textBox7.Text;
-                //string inputard = ((SerialPort)sender).ReadLine();
                 string[] ardconfig = inputard.Split(';');
                 textBoxname.AppendText(ardconfig[0]);
                 textBoxlrv.AppendText(ardconfig[1]);
@@ -203,30 +187,34 @@ namespace SoftSensConf
             if (password.Text == string.Empty)
             {
                 var message = "Password required.";
-                var title = string.Empty;
+                var title = "Missing password";
                 var result = MessageBox.Show(message, title,MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
-            else
+            else if (password.Text == "password")
             {
              
 
-                serialPort1.WriteLine("writeconf>" + password.Text + ">" + textBoxname.Text + ";" + textBoxlrv.Text + ";" + textBoxurv.Text + ";" + textBoxalarml.Text + ";" + textBoxalarmh.Text);
+                serialPort1.WriteLine("writeconf>password>" + textBoxname.Text + ";" + textBoxlrv.Text + ";" + textBoxurv.Text + ";" + textBoxalarml.Text + ";" + textBoxalarmh.Text);
                 string svar = serialPort1.ReadLine();
 
-                if (svar != null)
+                if (svar == "writeconf;1\r")
                 {
-                    textBox7.Text = "Configuration changed";
+                    MessageBox.Show("Configuration changed");
+                    password.Text = string.Empty;
                 }
 
                 else
                 {
-                    textBox7.Text = "Check your password again.";
+                    MessageBox.Show("Something went wrong");
+
                 }
+                
             }
-
-
-
+            else
+            {
+                MessageBox.Show("Check your password again.");
+            }
         }
     
         private void aboutbutton1_Click(object sender, EventArgs e)
@@ -252,11 +240,24 @@ namespace SoftSensConf
         {
             try
             {
-                serialPort1.WriteLine("readscaled");
-                char[] charstotrim = { 'r', 'e', 'a', 'd', 's', ';', 'c', 'l' };
+                serialPort1.WriteLine(comboBox3.SelectedItem.ToString());
+                char[] charstotrim = { 'r', 'e', 'a', 'd', 's', ';', 'c', 'l', 'w', ':' };
                 string result = serialPort1.ReadLine().Trim(charstotrim);
+
+                List<string> avlesninger = new List<string>();
+                DateTime now = DateTime.Now;
+                String timetrack = DateTime.Now.ToString();
+                TimeList.Add(now);
+                tid.Add(now.ToString("dd/MM/yy HH.mm:ss"));
+                avlesninger.Add(result);
+                chart1.Series[0].XValueType = ChartValueType.DateTime;
+
+                chart1.Series[0].Points.AddXY(now.ToString("HH:mm:ss"), result);
+                i += 2;
+
+                textBox.AppendText(now.ToString("dd/MM/yyyy,HH:mm:ss") + ";" + result + ";\r\n");
                 readingstextBox.AppendText(result + "\r\n");
-                
+
                 
                 timer1.Stop();
             }
@@ -268,30 +269,62 @@ namespace SoftSensConf
 
         private void autobutton_Click(object sender, EventArgs e)
         {
+            chart1.Titles.Clear();
+            chart1.Titles.Add(comboBox3.SelectedItem.ToString());
+            
             if (serialPort1.IsOpen)
             {
                 label7.Text = "Autoreading started";
                 timer1.Start();
-                serialPort1.WriteLine("readscaled");
-                char[] charstotrim = { 'r', 'e', 'a', 'd', 's', ';', 'c', 'l' };
-                string result = serialPort1.ReadLine().Trim(charstotrim);
-                readingstextBox.AppendText(result + "\r\n");
-
             }
 
             else
             {
                 readingstextBox.Text = "Port is closed.\r\n";
             }
-       
         }
 
-        private void stopbutton_Click(object sender, EventArgs e)
+            private void stopbutton_Click(object sender, EventArgs e)
         {
             timer1.Stop();
             label7.Text = "Autoreading stopped";
+        }
 
+        private void disconnectbutton_Click(object sender, EventArgs e)
+        {
+            timer2.Stop();
+            serialPort1.Close();
+            label9.Text = "Disconnected from " + comboBox1.Text + "\r\n";
+            label9.BackColor = Color.MistyRose;
+            label10.Text = "Disconnected from " + comboBox1.Text + "\r\n";
+            label10.BackColor = Color.MistyRose;
+            label11.Text = "Disconnected from " + comboBox1.Text + "\r\n";
+            label11.BackColor = Color.MistyRose;
+            label12.Text = "Disconnected from " + comboBox1.Text + "\r\n";
+            label12.BackColor = Color.MistyRose;
+            statusupdate.Text = " ";
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            status.Text = "Configuration saved on file:";
+        }
+
+        private void clearbutton_Click(object sender, EventArgs e)
+        {
+            readingstextBox.Text = " ";
+           
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            AboutBox1 aboutWindow = new AboutBox1();
+            aboutWindow.ShowDialog(this);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DateTime TimeStamp = DateTime.Now;
             var message = "Save readings to file?";
             var title = "Save?";
             var result = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -299,44 +332,40 @@ namespace SoftSensConf
             switch (result)
             {
                 case DialogResult.Yes:
-                    MessageBox.Show("Readings saved to file.");
+
                     string tittel = "SSC_Readings";
-                    List<string> avlesninger = new List<string>();
+                    //List<string> avlesninger = new List<string>();
 
-
-                    using (StringReader reader = new StringReader(readingstextBox.Text))
+                    using (StringReader reader = new StringReader(textBox.Text))
                     {
                         string line;
                         while ((line = reader.ReadLine()) != null)
                         {
-                            avlesninger.Add(line);                        }
+
+                            ts.Add(line.ToString());
+
+                        }
+
                     }
-                   
-                    //label8.Text = "idag er det" + DateTime.Now;
-                 
-                   File.WriteAllLines(@"C:\tmp\"+tittel+".csv", avlesninger);
+
+                    File.WriteAllLines(@"C:\tmp\" + tittel + ".csv", ts);
+                    MessageBox.Show("Readings saved to file");
 
                     break;
-                case DialogResult.No:   
+                case DialogResult.No:
                     MessageBox.Show("Readings not saved.");
                     break;
             }
-
         }
 
-        private void disconnectbutton_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
-            timer2.Stop();
-            serialPort1.Close();
-            textBox1.Text = "Disconnected from " + comboBox1.Text + "\r\n";
-            textBox1.BackColor = Color.MistyRose;
-            statusupdate.Text = " ";
-        }
-
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            status.Text = "Configuration saved on file:";
+            chart1.Series[0].Points.Clear();
+            readingstextBox.Text = string.Empty;
+            textBox.Text = string.Empty;
+            
         }
     }
+  
+    
 }
