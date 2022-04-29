@@ -52,7 +52,6 @@
             this.status = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.value_button = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBoxalarmh = new System.Windows.Forms.TextBox();
@@ -68,10 +67,12 @@
             this.save_settings_button = new System.Windows.Forms.Button();
             this.retrieve_settings_button = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox = new System.Windows.Forms.TextBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.statusupdate = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -82,17 +83,26 @@
             this.autobutton = new System.Windows.Forms.Button();
             this.manualbutton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.searchbtn = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.timebox = new System.Windows.Forms.TextBox();
+            this.valuebox = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -100,11 +110,13 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(735, 503);
+            this.tabControl1.Size = new System.Drawing.Size(887, 503);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.Click += new System.EventHandler(this.tabControl1_Click);
             // 
             // tabPage1
             // 
@@ -121,7 +133,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(727, 474);
+            this.tabPage1.Size = new System.Drawing.Size(879, 474);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Connect";
             // 
@@ -219,7 +231,6 @@
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 0;
             this.toolTip1.SetToolTip(this.comboBox1, "Connection port");
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -230,7 +241,6 @@
             this.tabPage2.Controls.Add(this.status);
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.value_button);
-            this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.textBox7);
             this.tabPage2.Controls.Add(this.panel1);
             this.tabPage2.Controls.Add(this.save_settings_button);
@@ -238,7 +248,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(727, 474);
+            this.tabPage2.Size = new System.Drawing.Size(879, 474);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Settings";
             // 
@@ -300,17 +310,6 @@
             this.toolTip1.SetToolTip(this.value_button, "Requires password");
             this.value_button.UseVisualStyleBackColor = true;
             this.value_button.Click += new System.EventHandler(this.value_button_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(637, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "About";
-            this.toolTip1.SetToolTip(this.button1, "About the software");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox7
             // 
@@ -448,12 +447,12 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.AliceBlue;
-            this.tabPage3.Controls.Add(this.button6);
-            this.tabPage3.Controls.Add(this.button5);
+            this.tabPage3.Controls.Add(this.label19);
+            this.tabPage3.Controls.Add(this.label18);
+            this.tabPage3.Controls.Add(this.textBox5);
             this.tabPage3.Controls.Add(this.textBox);
             this.tabPage3.Controls.Add(this.comboBox3);
             this.tabPage3.Controls.Add(this.label13);
-            this.tabPage3.Controls.Add(this.button4);
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.statusupdate);
             this.tabPage3.Controls.Add(this.label8);
@@ -467,9 +466,37 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(727, 474);
+            this.tabPage3.Size = new System.Drawing.Size(879, 474);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Sensor data";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(333, 64);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(71, 16);
+            this.label19.TabIndex = 29;
+            this.label19.Text = "Frequency";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(106, 65);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(39, 16);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "Type";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(410, 62);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(81, 22);
+            this.textBox5.TabIndex = 28;
+            this.textBox5.Text = "5000";
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // textBox
             // 
@@ -487,7 +514,7 @@
             this.comboBox3.Items.AddRange(new object[] {
             "readraw",
             "readscaled"});
-            this.comboBox3.Location = new System.Drawing.Point(97, 60);
+            this.comboBox3.Location = new System.Drawing.Point(151, 62);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(111, 24);
             this.comboBox3.TabIndex = 1;
@@ -500,17 +527,6 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(0, 16);
             this.label13.TabIndex = 24;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(637, 15);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 23;
-            this.button4.Text = "About";
-            this.toolTip1.SetToolTip(this.button4, "About the software");
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label11
             // 
@@ -570,9 +586,9 @@
             // 
             // stopbutton
             // 
-            this.stopbutton.Location = new System.Drawing.Point(268, 21);
+            this.stopbutton.Location = new System.Drawing.Point(466, 16);
             this.stopbutton.Name = "stopbutton";
-            this.stopbutton.Size = new System.Drawing.Size(119, 33);
+            this.stopbutton.Size = new System.Drawing.Size(150, 33);
             this.stopbutton.TabIndex = 13;
             this.stopbutton.Text = "Stop ";
             this.toolTip1.SetToolTip(this.stopbutton, "Push to stop autoreading\r\nand save readings\r\n");
@@ -589,9 +605,9 @@
             // 
             // autobutton
             // 
-            this.autobutton.Location = new System.Drawing.Point(151, 21);
+            this.autobutton.Location = new System.Drawing.Point(276, 16);
             this.autobutton.Name = "autobutton";
-            this.autobutton.Size = new System.Drawing.Size(111, 33);
+            this.autobutton.Size = new System.Drawing.Size(133, 33);
             this.autobutton.TabIndex = 11;
             this.autobutton.Text = "Auto ";
             this.toolTip1.SetToolTip(this.autobutton, "Push to get autoreading");
@@ -600,9 +616,9 @@
             // 
             // manualbutton
             // 
-            this.manualbutton.Location = new System.Drawing.Point(29, 21);
+            this.manualbutton.Location = new System.Drawing.Point(66, 16);
             this.manualbutton.Name = "manualbutton";
-            this.manualbutton.Size = new System.Drawing.Size(116, 33);
+            this.manualbutton.Size = new System.Drawing.Size(152, 33);
             this.manualbutton.TabIndex = 10;
             this.manualbutton.Text = "Manual ";
             this.toolTip1.SetToolTip(this.manualbutton, "Get one reading");
@@ -620,38 +636,107 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.dateTimePicker1);
+            this.tabPage4.Controls.Add(this.label14);
+            this.tabPage4.Controls.Add(this.comboBox4);
+            this.tabPage4.Controls.Add(this.lblTotal);
+            this.tabPage4.Controls.Add(this.searchbtn);
+            this.tabPage4.Controls.Add(this.dataGridView1);
+            this.tabPage4.Controls.Add(this.timebox);
+            this.tabPage4.Controls.Add(this.valuebox);
+            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(879, 474);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Search database";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(758, 27);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(64, 16);
+            this.lblTotal.TabIndex = 12;
+            this.lblTotal.Text = "Total hits ";
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // searchbtn
+            // 
+            this.searchbtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.searchbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchbtn.Location = new System.Drawing.Point(621, 6);
+            this.searchbtn.Name = "searchbtn";
+            this.searchbtn.Size = new System.Drawing.Size(131, 40);
+            this.searchbtn.TabIndex = 9;
+            this.searchbtn.Text = "Search";
+            this.searchbtn.UseVisualStyleBackColor = false;
+            this.searchbtn.Click += new System.EventHandler(this.searchbtn_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 52);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(867, 416);
+            this.dataGridView1.TabIndex = 8;
+            // 
+            // timebox
+            // 
+            this.timebox.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.timebox.Location = new System.Drawing.Point(717, 418);
+            this.timebox.Name = "timebox";
+            this.timebox.Size = new System.Drawing.Size(10, 22);
+            this.timebox.TabIndex = 3;
+            // 
+            // valuebox
+            // 
+            this.valuebox.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.valuebox.Location = new System.Drawing.Point(742, 431);
+            this.valuebox.Name = "valuebox";
+            this.valuebox.Size = new System.Drawing.Size(10, 22);
+            this.valuebox.TabIndex = 0;
+            this.valuebox.TextChanged += new System.EventHandler(this.valuebox_TextChanged);
+            // 
             // timer1
             // 
             this.timer1.Interval = 3000;
             // 
-            // button5
+            // label14
             // 
-            this.button5.Location = new System.Drawing.Point(393, 21);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(119, 33);
-            this.button5.TabIndex = 26;
-            this.button5.Text = "Save ";
-            this.toolTip1.SetToolTip(this.button5, "Push to stop autoreading\r\nand save readings\r\n");
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(172, 3);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(36, 16);
+            this.label14.TabIndex = 15;
+            this.label14.Text = "Area";
             // 
-            // button6
+            // comboBox4
             // 
-            this.button6.Location = new System.Drawing.Point(516, 21);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(119, 33);
-            this.button6.TabIndex = 27;
-            this.button6.Text = "Clear ";
-            this.toolTip1.SetToolTip(this.button6, "Push to stop autoreading\r\nand save readings\r\n");
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(127, 19);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(121, 24);
+            this.comboBox4.TabIndex = 14;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(306, 19);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.TabIndex = 16;
             // 
             // retrieve
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(767, 530);
+            this.ClientSize = new System.Drawing.Size(912, 530);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "retrieve";
@@ -666,6 +751,9 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -697,7 +785,6 @@
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button aboutbutton1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button autobutton;
         private System.Windows.Forms.Button manualbutton;
@@ -719,12 +806,21 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBox;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TextBox valuebox;
+        private System.Windows.Forms.TextBox timebox;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Button searchbtn;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox comboBox4;
     }
 }
 
